@@ -7,7 +7,11 @@ import com.udacity.jdnd.course3.critter.pet.PetDTO;
 import com.udacity.jdnd.course3.critter.pet.PetType;
 import com.udacity.jdnd.course3.critter.schedule.ScheduleController;
 import com.udacity.jdnd.course3.critter.schedule.ScheduleDTO;
-import com.udacity.jdnd.course3.critter.user.*;
+import com.udacity.jdnd.course3.critter.user.controller.UserController;
+import com.udacity.jdnd.course3.critter.user.dto.CustomerDTO;
+import com.udacity.jdnd.course3.critter.user.dto.EmployeeDTO;
+import com.udacity.jdnd.course3.critter.user.dto.EmployeeRequestDTO;
+import com.udacity.jdnd.course3.critter.user.entity.EmployeeSkill;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -95,9 +99,12 @@ public class CritterFunctionalTest {
         PetDTO petDTO = createPetDTO();
         petDTO.setOwnerId(newCustomer.getId());
         PetDTO newPet = petController.savePet(petDTO);
-        petDTO.setType(PetType.DOG);
-        petDTO.setName("DogName");
-        PetDTO newPet2 = petController.savePet(petDTO);
+
+        PetDTO petDTO2 = createPetDTO();
+        petDTO2.setOwnerId(newCustomer.getId());
+        petDTO2.setType(PetType.DOG);
+        petDTO2.setName("DogName");
+        PetDTO newPet2 = petController.savePet(petDTO2);
 
         List<PetDTO> pets = petController.getPetsByOwner(newCustomer.getId());
         Assertions.assertEquals(pets.size(), 2);

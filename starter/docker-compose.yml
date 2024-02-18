@@ -1,0 +1,20 @@
+version: '3.5'
+
+networks : 
+  localdev:
+    name: localdev
+
+services:
+
+  db-server:
+    image: mcr.microsoft.com/mssql/server
+    container_name: db-server-critter
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=Aa12345!!
+      - MSSQL_TCP_PORT=1433
+
+    ports:
+      - "1400:1433"
+    networks:
+      - localdev
